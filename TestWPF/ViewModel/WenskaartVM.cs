@@ -46,10 +46,6 @@ namespace TestWPF.ViewModel
                 Kleur kleur = new Kleur();
                 kleur.Brush = deKleur;
                 kleur.Naam = info.Name;
-                kleur.Hex = deKleur.ToString();
-                kleur.Rood = deKleur.Color.R;
-                kleur.Groen = deKleur.Color.G;
-                kleur.Blauw = deKleur.Color.B;
                 KleurLijst.Add(kleur);
             }
         }        
@@ -173,7 +169,7 @@ namespace TestWPF.ViewModel
             Fontsize = 24;
             Lettertype = new FontFamily("Arial");
             Ballen.Clear();
-            Status = "nieuw";
+            Status = "Nieuw";
         }
 
         public RelayCommand OpenenCommand
@@ -263,8 +259,10 @@ namespace TestWPF.ViewModel
                             bestand.WriteLine(bal.YPositie.ToString());
                             bestand.WriteLine(bal.Kleur.ToString());
                         }
-                    }
+                    }                    
                 }
+
+                Status = dlg.FileName;
             }
             catch (Exception ex)
             {
@@ -396,7 +394,10 @@ namespace TestWPF.ViewModel
 
         private void GroterLettertype()
         {
-            Fontsize++;
+            if (Fontsize < 40)
+            {
+                Fontsize++;
+            }            
         }
 
         public RelayCommand KleinerCommand
@@ -409,7 +410,10 @@ namespace TestWPF.ViewModel
 
         private void KleinerLettertype()
         {
-            Fontsize--;
+            if (Fontsize > 1)
+            {
+                Fontsize--;
+            }            
         }
 
         public RelayCommand<MouseEventArgs> DragCommand
